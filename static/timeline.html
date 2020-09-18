@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet" >
+        <link href="styles.css" rel="stylesheet">
+        <title>Wormbin Application timelines</title>
+    </head>
+
+    <body>
+        <!-- Sidebar -->
+        <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
+            <h3 class="w3-bar-item">Navigation</h3>
+            <a href="/static/index.html" target="_self" class="w3-bar-item w3-button">Homepage</a>
+            <a href="/static/timeline.html" target="_self" class="w3-bar-item w3-button">Wormbin Monitor</a>
+            <a href="/static/news_articles.html" target="_self" class="w3-bar-item w3-button">IOT News Articles</a>
+            <a href="/static/interact.html" target="_self" class="w3-bar-item w3-button">Contact Me</a>
+        </div>
+        <!-- End Sidebar -->
+        
+        
+        <!-- Page Content -->
+         <div style="margin-left:25%">
+        
+                <div class="w3-container w3-teal">
+                  <h1>Wormbin Activity Monitor </h1>
+                  <p>tracks Temperature, Humidity, and Barometric Pressure over time.  The goal is to provide a better worm habitat by monitoring and maintaining temperature at a consistent and optimal temperature band to increase vermicast production and population.  The monitoring objectives will focus on:  A.) consistent worm pile temperature and B.) consistent Wormbin humidity level to reduce wall moisture.  This project will be implemented in 3 phases:  1.)  Sensor package to automatically measure and send the readings to a central storage point.  2.) Software application to automatically store and display measurements based on User inquiries.  3.) Deploying that software application to a hosted software vendor such as Google Cloud Compute or Amazon AWS.</p>
+                </div>
+    
+                  <img src="sensorpackage.jpeg" width="200" height="200" alt="Sensor package">
+    
+                <div class="w3-container">
+                    <button onclick="location.href='/'" type="button">
+                        Start Page</button>
+                    <h2>Sensor package(BME280, DS18B20) logging measurements to Influxdb via MQTT</h2>
+                    <p>The main sensor package is comprised of a microcontroller (ESP8266) managing sensors using the i2c protocol.  The main benefit of pairing the ESP8266 with i2c sensors is low cost, excellent documentation and wide commercial availability.  Microcontroller code was written in C and various sensor libraries depend heavily on open source software.  All Arduino sketches are available by private inquiry. </p>
+
+                </div>
+                
+                <div class="w3-container">
+                    <h2>Flask Web Application</h2>
+                    <p>Static Website application:  check</p>
+                    <p>Database logging Temp, Humidity, Ba Pressure:  Check</p>
+                    <p>Python Intergration to Database:  Check</p>
+                    <p>Flask Integration to Database:  Check</p>
+                    <P>Static HTML, dynamic python, styling all look correct through Nginx</P>
+                    <p>SQL database for credentials:  Open</p>
+                </div> 
+                       
+                <div class="w3-container">
+                    <h2>Cloud Web Application</h2>
+                    <p>Goggle Cloud Computre or AWS:  check</p>
+                    <p>Cloud Storage:  Open</p>
+                    <p>Application Engine:  Open</p>
+                    <p>Database:  Open</p>
+                </div> 
+        </div>
+    </body>
+</html>
