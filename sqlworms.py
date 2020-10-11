@@ -3,9 +3,8 @@ import time
 import datetime
 import paho.mqtt.client as mqtt
 
-import mysql.connector
-from mysql.connector import Error
-from mysql.connector import errorcode
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 wormtmp = "wormtmp"
 temperature_topic = "tempf"
@@ -49,32 +48,34 @@ def on_message(client, userdata, msg):
 
 
 def writeToDb(collector, theTime, wormtmp, tempf, humidity, ba_pressure):
+    #Write to local sql server
+    engine = create_engine('mysql://pi:squadleader@localhost/wormbin', echo = False)
+    Session = sessionmaker(bind=engine)
+    session = Session()
     print ("Writing to %s table..." % (collector))
-    connection = mysql.connector.connect(host='localhost',
-                                        database='wormbin',
-                                        user='pi',
-                                        password='squadleader')
-#"INSERT INTO %s (read_time, wormtmp, tempf, humidity, ba_pressure, name) VALUES (?,?,?,?,?,?)" % (collector), (theTime, wormtmp, tempf, humidity, ba_pressure, collector)
 
-    cursor = connection.cursor()
+    cursor = engine.connect()
     sql="INSERT INTO wormbin.%s (read_time, wormtmp, tempf, humidity, ba_pressure, name) VALUES ('{}',{},{},{},{},'{}')" % (collector)
-#    print (sql)
-#    print (theTime, wormtmp, tempf, humidity, ba_pressure, collector)
     cursor.execute(sql.format(theTime, wormtmp, tempf, humidity, ba_pressure, collector))
-#    cursor.execute('''INSERT INTO %s (read_time, wormtmp, tempf, humidity, ba_pressure, name) VALUES
-#                        (?, ?, ?, ?, ?, ?)''' % (collector), (theTime, wormtmp, tempf, humidity, ba_pressure, collector))
-    connection.commit()
-    print(cursor.rowcount, "Record inserted successfully")
+    session.commit()
+#    connection.commit()
+    print("Record inserted to local sql server")
     cursor.close()
 
-#old code
-#    c = conn.cursor()
-#    print ("Writing to %s table..." % (collector))
-#    sqlite_insert_query ="INSERT INTO wormbin (read_time, wormtmp, tempf, humidity, ba_pressure) VALUES (?,?,?,?,?)", (theTime, wormtmp, tempf, humidity, ba_pressure)
-#    c.execute(sqlite_insert_query)
-#    c.execute("INSERT INTO %s (read_time, wormtmp, tempf, humidity, ba_pressure, name) VALUES (?,?,?,?,?,?)" % (collector), (theTime, wormtmp, tempf, humidity, ba_pressure, collector))
-#    conn.commit()
-#end old code
+    #write to cloud sql server
+    engine = create_engine('mysql://pi:squadleader@34.94.43.115/wormbin', echo = False)
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    print ("Writing to %s table...viacloud" % (collector))
+
+    cursor = engine.connect()
+    sql="INSERT INTO wormbin.%s (read_time, wormtmp, tempf, humidity, ba_pressure, name) VALUES ('{}',{},{},{},{},'{}')" % (collector)
+    cursor.execute(sql.format(theTime, wormtmp, tempf, humidity, ba_pressure, collector))
+    session.commit()
+#    connection.commit()
+    print("Record inserted to cloud sql server")
+    cursor.close()
+
 
     global dataTuple
     dataTuple = [-1,-1,-1,-1]
@@ -91,6 +92,3 @@ client.connect("192.168.1.20", 1883, 60)
 # Other loop*() functions are available that give a threaded interface and a
 # manual interface.
 client.loop_forever()
-
-
-

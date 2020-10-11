@@ -27,6 +27,7 @@ padding: 8px;
     <h1>Wormbin Application Monitor</h1>
     <h1>Select the sensor to see the data.</h1>
 </div>
+<div>
     <button onclick="location.href='/Frank'" type="button">
         Frank</button>
     <button onclick="location.href='/Heidi'" type="button">
@@ -41,11 +42,32 @@ padding: 8px;
         Website</button>
     <button onclick="location.href='/plot'" type="button">
         Regenerate Plots</button>  
-<p>Frank: main wormbin (bme280, DS18B20)</p>
-<p>Heidi: office back wall floor corner (bme280)</p>
-<p>Ester: Outdoor on the corner of the house (bme280)</p>
-<p>Carla: (bme180, photoresistor) out of service</p>
-<p>Genie: Testbed sensor reports readings every min</p>
+    <p>Frank: main wormbin (bme280, DS18B20)</p>
+    <p>Heidi: office back wall floor corner (bme280)</p>
+    <p>Ester: Outdoor on the corner of the house (bme280)</p>
+    <p>Carla: (bme180, photoresistor) out of service</p>
+    <p>Genie: Testbed sensor reports readings every min</p>
+</div>
+    
+<table style="width:100%">
+    <tr><th>ID</th>
+       <th>Name</th>
+       <th>Read_time</th>
+       <th>Wormtmp</th>
+       <th>TempF</th>
+       <th>Humidity</th>
+       <th>ba_pressure</th></tr>
+    {% for entry in readings %}
+    <tr><td>{{ entry.0 }}</td>
+       <td>{{ entry.6 }}</td>
+       <td>{{ entry.1 }}</td>
+       <td>{{ entry.2 }}</td>
+       <td>{{ entry.3 }}</td>
+       <td>{{ entry.4 }}</td>
+       <td>{{ entry.5 }}</td></tr>
+    {% endfor %}
+    </table>
+    
 <table style="width:100%">
     <tr>
         <th><img src="{{url_for('static', filename='wormbin.jpeg')}}" alt="Pic of wormbin" width="400" height="300"></th>

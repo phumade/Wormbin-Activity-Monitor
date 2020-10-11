@@ -1,6 +1,9 @@
+#!/usr/bin/python3
 import time
 import datetime
-import MySQLdb
+import sqlalchemy
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 import numpy as np
 import matplotlib
@@ -17,15 +20,15 @@ import sys
 
 hfmt = matplotlib.dates.DateFormatter('%H:%M:%S')
 
-
+#Reading from to local sql server
+engine = create_engine('mysql://pi:squadleader@localhost/wormbin', echo = False)
+Session = sessionmaker(bind=engine)
+session = Session()
+print ("Reading from table...")
 #Initial database querry
-connection = MySQLdb.connect(host='localhost',
-                                    database='wormbin',
-                                    user='pi',
-                                    password='squadleader')
 
-cursor = connection.cursor()
-sql = "SELECT * FROM wormbin.Frank ORDER BY read_time limit 1440"
+cursor = engine.connect()
+sql = "SELECT * FROM wormbin.Frank union select * from wormbin.Heidi ORDER BY read_time DESC LIMIT 10"
 cursor.execute(sql)
 result = cursor.fetchall()
 print(result)
