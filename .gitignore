@@ -179,3 +179,5 @@ appworms.sock
 __pycache__/appworms.cpython-37.pyc
 __pycache__/wsgi.cpython-37.pyc
 dump.sql
+.vscode/settings.json
+__pycache__/appworms.cpython-37.pyc

@@ -27,7 +27,7 @@ for row in c.execute(sql):
     graphArray.append(graphArrayAppend)
 
 read_time, value = np.loadtxt(graphArray,delimiter=',', unpack=True,
-                              converters={ 0: mdates.strpdate2num(' %Y-%m-%d %H:%M:%S')})
+                              converters={0: lambda x: mdates.datestr2num(x.decode('utf8'))})
 
 fig = plt.figure()
 rect = fig.patch
@@ -44,7 +44,7 @@ for row in c.execute(sql):
     graphArray.append(graphArrayAppend)
 
 read_time, value = np.loadtxt(graphArray,delimiter=',', unpack=True,
-                              converters={ 0: mdates.strpdate2num(' %Y-%m-%d %H:%M:%S')})
+                              converters={0: lambda x: mdates.datestr2num(x.decode('utf8'))})
 tempf, =plt.plot_date(x=read_time, y=value, fmt='go-', label = 'Top of wormbin temp', linewidth=2)
 
 #new sql query for outdoor temp
@@ -62,7 +62,7 @@ for row in c.execute(sql):
     graphArray.append(graphArrayAppend)
 
 read_time, value = np.loadtxt(graphArray,delimiter=',', unpack=True,
-                              converters={ 0: mdates.strpdate2num(' %Y-%m-%d %H:%M:%S')})
+                              converters={0: lambda x: mdates.datestr2num(x.decode('utf8'))})
 outside, =plt.plot_date(x=read_time, y=value, fmt='mD-', label = 'Outdoor temp', linewidth=2)
 
 #new sql query for office floor temp
@@ -80,7 +80,7 @@ for row in c.execute(sql):
     graphArray.append(graphArrayAppend)
 
 read_time, value = np.loadtxt(graphArray,delimiter=',', unpack=True,
-                              converters={ 0: mdates.strpdate2num(' %Y-%m-%d %H:%M:%S')})
+                              converters={0: lambda x: mdates.datestr2num(x.decode('utf8'))})
 office, =plt.plot_date(x=read_time, y=value, fmt='b^-', label = 'Office floor corner temp', linewidth=2)
 
 

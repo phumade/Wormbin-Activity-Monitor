@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+##!/usr/bin/python3
 import time
 import datetime
 import sqlalchemy
@@ -21,7 +21,7 @@ import sys
 hfmt = matplotlib.dates.DateFormatter('%H:%M:%S')
 
 #Reading from to local sql server
-engine = create_engine('mysql://pi:squadleader@localhost/wormbin', echo = False)
+engine = create_engine('mysql://pi:squadleader@192.168.1.5/wormbin', echo = False)
 Session = sessionmaker(bind=engine)
 session = Session()
 print ("Reading from table...")
