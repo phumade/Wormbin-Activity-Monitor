@@ -92,6 +92,3 @@ plt.legend(bbox_to_anchor=(1, 1),
 #print(os.listdir('.'))
 plt.show()
 plt.savefig('/Volumes/Rpi4www/flask/worms/static/humidity.png')
-
-
-	  

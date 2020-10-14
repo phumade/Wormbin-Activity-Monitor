@@ -1,8 +1,8 @@
 from sqlalchemy import create_engine
 
-from matplotlib import pyplot as plt
+# from matplotlib import pyplot as plt
 
-engine = create_engine('mysql://pi:squadleader@localhost/wormbin', echo = True)
+engine = create_engine('mysql://pi:squadleader@192.168.1.5/wormbin', echo = True)
 cursor = engine.connect()
 query = 'select * from Frank order by read_time DESC limit 10'
 result = cursor.execute(query)
