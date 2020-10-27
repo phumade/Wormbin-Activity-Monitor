@@ -59,5 +59,6 @@
     "python.autoComplete.extraPaths": [
     
     ],
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "editor.formatOnSave": true
 }
