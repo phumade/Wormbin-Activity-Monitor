@@ -32,7 +32,7 @@ def main():
    # connects to SQLite database. File is named "wormbin.db" without the quotes
    # WARNING: your database file should be in the same directory of the appworms.py file or have the correct path
    cur = mysql.connection.cursor()
-   cur.execute("SELECT * FROM wormbin.Frank union select * from wormbin.Heidi ORDER BY read_time DESC LIMIT 10")
+   cur.execute("SELECT * FROM wormbin.Frank union select * from wormbin.Heidi union select * from wormbin.Ester ORDER BY read_time DESC LIMIT 10")
    readings = cur.fetchall()
    cur.close()
 #   print(readings)

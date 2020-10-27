@@ -4,7 +4,8 @@ import datetime
 
 import numpy as np
 import matplotlib
-matplotlib.use('Agg')
+#if matplot commented then display local
+#matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 

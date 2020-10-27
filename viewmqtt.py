@@ -12,6 +12,7 @@ humidity_topic = "humidity"
 ba_pressure = "ba_pressure"
 dbFile = "wormbin.db"
 dataTuple = [-1,-1,-1,-1]
+encoding = 'utf-8'
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
@@ -28,17 +29,17 @@ def on_connect(client, userdata, flags, rc):
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
     theTime = strftime("%Y-%m-%d %H:%M:%S", localtime())
-    result = (theTime + "\t" + str(msg.payload))
+    result = (theTime + "\t" + str(msg.payload, encoding))
     print(msg.topic + ":\t\t" + result)
     collector = str(msg.topic[0:5])
     if (msg.topic[6:] == wormtmp):
-        dataTuple[0] = str(msg.payload)
+        dataTuple[0] = str(msg.payload, encoding)
     if (msg.topic[6:] == temperature_topic):
-        dataTuple[1] = str(msg.payload)
+        dataTuple[1] = str(msg.payload, encoding)
     if (msg.topic[6:] == humidity_topic):
-        dataTuple[2] = str(msg.payload)
+        dataTuple[2] = str(msg.payload, encoding)
     if (msg.topic[6:] == ba_pressure):
-        dataTuple[3] = str(msg.payload)
+        dataTuple[3] = str(msg.payload, encoding)
     if (collector != 'Frank'):
         dataTuple[0] = str(0)    
     if (dataTuple[1] != -1 and dataTuple[1] != -1 and dataTuple[2] != -1 and dataTuple[3] != -1):
