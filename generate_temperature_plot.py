@@ -96,4 +96,4 @@ plt.legend(bbox_to_anchor=(1, 1),
 #print "Current working dir : %s" % os.getcwd()
 #print(os.listdir('.'))
 plt.show()
-#plt.savefig('/Volumes/Rpi4www/flask/worms/static/tempf.png')
+plt.savefig('static/tempf.png')

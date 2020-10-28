@@ -99,6 +99,6 @@ plt.legend(bbox_to_anchor=(1, 1),
 #print(os.listdir('.'))
 plt.show()
 #print(os.path.abspath(appworms.py))
-#plt.savefig('/home/pi/worms/static/ba_pressure.png')
+plt.savefig('static/ba_pressure.png')
 print("success")
 
